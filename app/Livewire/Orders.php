@@ -60,7 +60,7 @@ class Orders extends Component
             'status' => 'proceeding',
             'check_in' => now(),
         ]);
-        session()->flash('error', 'Request Proceding');
+        session()->flash('message', 'Request Proceding');
     }
 
     public function existRequest()
