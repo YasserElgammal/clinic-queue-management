@@ -97,8 +97,10 @@ class Orders extends Component
 
     public function calculateTotalTime()
     {
-        $this->totalTimeInMinutes = Order::where('status', 'waiting')->selectRaw('SUM(TIMESTAMPDIFF(MINUTE, created_at, created_at + INTERVAL 5 MINUTE)) as total_time')
-            ->value('total_time');
+        $this->totalTimeInMinutes = Order::where('status', 'waiting')
+        ->where('user_id', '<>', auth()->id())
+        ->selectRaw('SUM(TIMESTAMPDIFF(MINUTE, created_at, created_at + INTERVAL 5 MINUTE)) as total_time')
+        ->value('total_time');
     }
 
     public function render()
